@@ -1,0 +1,30 @@
+{
+  "name": "mercadolivre",
+  "version": "1.0.0",
+  "description": "mercadolivre api to js interface",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tegila/mercadolivre.git"
+  },
+  "keywords": [
+    "mercadolivre",
+    "api",
+    "coffee",
+    "js",
+    "nodejs"
+  ],
+  "author": "Edson Tegila",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/tegila/mercadolivre/issues"
+  },
+  "homepage": "https://github.com/tegila/mercadolivre#readme",
+  "dependencies": {
+    "debug": "^2.6.0",
+    "lodash": "^4.17.4"
+  }
+}
