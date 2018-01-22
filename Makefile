@@ -18,7 +18,10 @@ clean: clean-docs
 	rm -rf lib/ test/*.js
 
 build:
-	coffee -o lib/ -c src/ # && coffee -c test/refix.coffee
+	#cat src/index.coffee > lib/mercadolivre.coffee
+	#(GLOBIGNORE="index.coffee" ; cat  src/*.coffee  >> lib/mercadolivre.coffee)
+	#coffee --compile lib/mercadolivre.coffee > lib/mercadolivre.js
+	coffee --output lib --compile src
 
 test:
 	nodeunit test/refix.js

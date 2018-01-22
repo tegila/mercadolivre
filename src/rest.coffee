@@ -1,10 +1,9 @@
+log = require('debug')('log')
+
 querystring = require('querystring')
 https = require('https')
 
 Rest = (host) ->
-  @_put = (endpoint, query, data, success) ->
-    _request(endpoint, "PUT", query, data, success)
-
   @_get = (endpoint, query, success) ->
     _request(endpoint, "GET", query, null, success)
 
@@ -12,14 +11,17 @@ Rest = (host) ->
     _request(endpoint, "POST", query, data, success)
 
   _request = (endpoint, method, query, data, success) ->
+
     dataString = JSON.stringify(data)
     headers = {}
+    endpoint += '?' + querystring.stringify(query)
     if method is 'GET'
-      endpoint += '?' + querystring.stringify(query)
     else
+      #dataString = encodeURIComponent dataString
       headers =
         'Content-Type': 'application/json'
-        'Content-Length': dataString.length
+        'Content-Length': Buffer.byteLength(dataString, 'utf-8')
+        'x-format-new': true
     options = 
       host: host
       path: endpoint
@@ -35,7 +37,7 @@ Rest = (host) ->
       res.on 'end', ->
         success JSON.parse(responseString)
 
-    req.write dataString or ""
+    req.write dataString
     do req.end
 
   return this  
