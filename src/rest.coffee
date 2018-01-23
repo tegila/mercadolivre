@@ -1,46 +1,36 @@
-log = require('debug')('log')
-
 querystring = require('querystring')
-https = require('https')
 
-Rest = (host) ->
+Rest = ->
+  host = "https://api.mercadolibre.com"
+
   @_get = (endpoint, query, success) ->
-    _request(endpoint, "GET", query, null, success)
+    endpoint += '?' + querystring.stringify(query)
+    xhr = new XMLHttpRequest()
+    url = "#{host}#{endpoint}"
+    xhr.open "GET", url, true
+    xhr.onreadystatechange = ->
+      if (this.readyState isnt 4) 
+        return
+      if (this.status is 200) 
+        data = JSON.parse(this.responseText)
+        success(data)
+    xhr.send null
 
   @_post = (endpoint, query, data, success) ->
-    _request(endpoint, "POST", query, data, success)
+    xhr = new XMLHttpRequest()
+    url = "#{host}#{endpoint}"
+    xhr.open "POST", url, true
+    #xhr.setRequestHeader 'Content-Type', 'application/json'
 
-  _request = (endpoint, method, query, data, success) ->
-
-    dataString = JSON.stringify(data)
-    headers = {}
-    endpoint += '?' + querystring.stringify(query)
-    if method is 'GET'
-    else
-      #dataString = encodeURIComponent dataString
-      headers =
-        'Content-Type': 'application/json'
-        'Content-Length': Buffer.byteLength(dataString, 'utf-8')
-        'x-format-new': true
-    options = 
-      host: host
-      path: endpoint
-      method: method
-      headers: headers
-
-    console.log "#{method} => #{endpoint}"
-    req = https.request options, (res) ->
-      res.setEncoding 'utf-8'
-      responseString = ''
-      res.on 'data', (data) ->
-        responseString += data
-      res.on 'end', ->
-        success JSON.parse(responseString)
-
-    req.write dataString
-    do req.end
+    xhr.onreadystatechange = ->
+      if (this.readyState != 4) 
+        return
+      if (this.status == 200) 
+        data = JSON.parse(this.responseText)
+        success(data)
+    xhr.send JSON.stringify(data)
 
   return this  
 
-module.exports = Rest
+module.exports = do Rest
 

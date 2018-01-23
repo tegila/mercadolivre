@@ -1,9 +1,7 @@
 log = require('debug')('log')
 
 Rest = require "./rest"
-rest = Rest "api.mercadolibre.com"
-
-config = require("./config")
+config = require "./config"
 
 Auth = {}
 
@@ -22,10 +20,12 @@ Auth._init_token = (callback) ->
     grant_type: "client_credentials"
     client_id: config.client_id
     client_secret: config.client_secret
-  rest._post "/oauth/token", null, data, (response) ->
-    log "response:", response
-    config.session.access_token = response.access_token
-    config.session.seller_id = response.user_id
+  Rest._post "/oauth/token", null, data, (data) ->
+    console.log "response:", data
+    config.session = {}
+    config.session.access_token = data.access_token
+    config.session.seller_id = data.user_id
+    console.log config.session
     callback config.session  
 
 ### TODO: Not working ###
@@ -35,6 +35,6 @@ Auth._refresh_token = (callback) ->
     client_id: config.client_id
     client_secret: config.client_secret
     refresh_token: config.session.refresh_token
-  rest._post "/oauth/token", data, callback
+  Rest._post "/oauth/token", data, callback
 
 module.exports = Auth

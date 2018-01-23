@@ -2,7 +2,6 @@ log = require('debug')('log')
 _ = require "lodash"
 
 Rest = require "./rest"
-rest = Rest "api.mercadolibre.com"
 
 Auth = require './auth'
 Utils = require './utils'
@@ -18,6 +17,6 @@ Questions.unanswered = (callback) ->
       "access_token": config.session.access_token
       "seller": config.session.seller_id
       "status": "UNANSWERED"
-    rest._get "/questions/search", data, callback
+    Rest._get "/questions/search", data, callback
 
 module.exports = Questions
