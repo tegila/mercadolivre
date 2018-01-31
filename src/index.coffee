@@ -2,7 +2,8 @@ log = require('debug')('log')
 
 config = require("./config")
 
-Mercadolivre = 
+Mercadolivre =
+  Auth: require './auth' 
   Users: require './users'
   Categories: {}
   Listings: {}
@@ -14,7 +15,7 @@ Mercadolivre =
   Questions: require './questions'
   Feedback: {}
   Metrics: {}
-  Shipping: {}
+  Shipping: require './shipping'
 
 module.exports = (client_id, client_secret, session) ->
   config.client_id = client_id

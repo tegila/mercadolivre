@@ -13,7 +13,9 @@ Auth.get_token = (callback) =>
     callback config.session
   else
     Auth._init_token callback
-
+Auth._change_user_id = (new_user_id) ->
+  config.session.seller_id = new_user_id
+  
 # Get a brand new token from OAUTH2 #
 Auth._init_token = (callback) ->
   data =

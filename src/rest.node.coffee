@@ -3,7 +3,9 @@ log = require('debug')('log')
 querystring = require('querystring')
 https = require('https')
 
-Rest = (host) ->
+Rest = ->
+  host = "api.mercadolibre.com"
+
   @_get = (endpoint, query, success) ->
     _request(endpoint, "GET", query, null, success)
 
@@ -14,6 +16,8 @@ Rest = (host) ->
 
     dataString = JSON.stringify(data)
     headers = {}
+    console.log "query:", query
+
     endpoint += '?' + querystring.stringify(query)
     if method is 'GET'
     else
