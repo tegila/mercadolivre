@@ -1,1 +1,1 @@
-module.exports = do require('./rest.node')
+module.exports = do require('./rest.browser')

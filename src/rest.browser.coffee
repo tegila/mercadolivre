@@ -8,6 +8,7 @@ Rest = ->
     xhr = new XMLHttpRequest()
     url = "#{host}#{endpoint}"
     xhr.open "GET", url, true
+    xhr.setRequestHeader 'x-format-new', true
     xhr.onreadystatechange = ->
       if (this.readyState isnt 4) 
         return
@@ -32,5 +33,5 @@ Rest = ->
 
   return this  
 
-module.exports = do Rest
+module.exports = Rest
 
