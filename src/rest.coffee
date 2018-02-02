@@ -1,1 +1,1 @@
-module.exports = do require('./rest.browser')
+Rest = do Rest_browser

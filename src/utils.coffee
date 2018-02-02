@@ -1,8 +1,5 @@
 Utils = {}
 
-_ = require "lodash"
-log = require('debug')('log')
-
 ### @_is_updated_version compare two objects ###
 Utils.is_an_updated_version = (obj1, obj2) ->
   if obj1.date_created is obj2.date_created
@@ -57,5 +54,3 @@ Utils.paginate = (fn, url, params, callback, _yield) ->
       Utils.paginate fn, url, params, callback, _yield
     else
       callback _yield
-
-module.exports = Utils

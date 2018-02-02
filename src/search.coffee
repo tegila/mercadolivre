@@ -1,7 +1,3 @@
-log = require('debug')('log')
-_ = require "lodash"
-
-Rest = require "./rest"
 
 Search = {}
 
@@ -44,5 +40,3 @@ Search.items_from_nickname = (nickname, callback) ->
   data =
     nickname: nickname
   Rest._get "/sites/MLB/search", data, callback
-
-module.exports = Search

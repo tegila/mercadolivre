@@ -1,5 +1,3 @@
-Rest = require "./rest"
-
 Users = {}
 ### @get_user - ###
 Users.by_id = (user_id, callback) ->

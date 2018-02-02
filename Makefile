@@ -22,7 +22,8 @@ build:
 	#(GLOBIGNORE="index.coffee" ; cat  src/*.coffee  >> lib/mercadolivre.coffee)
 	#coffee --compile lib/mercadolivre.coffee > lib/mercadolivre.js
 	#coffee --output lib --compile src
-	coffee --join lib/index.js --compile src/*.coffee
+	#coffee --join lib/index.js --compile src/*.coffee
+	cat .\src\*.coffee | coffee --compile --stdio > lib/index.js
 test:
 	nodeunit test/refix.js
 

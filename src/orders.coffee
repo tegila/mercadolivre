@@ -1,10 +1,3 @@
-log = require('debug')('log')
-_ = require "lodash"
-
-Rest = require "./rest"
-
-Auth = require './auth'
-config = require './config'
 
 Orders = {}
 
@@ -84,5 +77,3 @@ Orders.archived_orders = (seller, offset, callback) ->
       seller: seller
       offset: offset || 0
     Rest._get "/orders/search/archived", data, callback
-
-module.exports = Orders

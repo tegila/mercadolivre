@@ -1,6 +1,5 @@
-querystring = require('querystring')
 
-Rest = ->
+Rest_browser = ->
   host = "https://api.mercadolibre.com"
 
   @_get = (endpoint, query, success) ->
@@ -8,7 +7,7 @@ Rest = ->
     xhr = new XMLHttpRequest()
     url = "#{host}#{endpoint}"
     xhr.open "GET", url, true
-    xhr.setRequestHeader 'x-format-new', true
+    #xhr.setRequestHeader 'x-format-new', true
     xhr.onreadystatechange = ->
       if (this.readyState isnt 4) 
         return
@@ -33,5 +32,4 @@ Rest = ->
 
   return this  
 
-module.exports = Rest
 

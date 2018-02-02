@@ -1,9 +1,5 @@
-log = require('debug')('log')
 
-querystring = require('querystring')
-https = require('https')
-
-Rest = ->
+Rest_node = ->
   host = "api.mercadolibre.com"
 
   @_get = (endpoint, query, success) ->
@@ -46,5 +42,4 @@ Rest = ->
 
   return this  
 
-module.exports = Rest
 

@@ -1,11 +1,3 @@
-log = require('debug')('log')
-_ = require "lodash"
-
-Rest = require "./rest"
-
-Auth = require './auth'
-Utils = require './utils'
-config = require './config'
 
 Questions = {}
 
@@ -19,4 +11,3 @@ Questions.unanswered = (callback) ->
       "status": "UNANSWERED"
     Rest._get "/questions/search", data, callback
 
-module.exports = Questions

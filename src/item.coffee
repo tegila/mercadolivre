@@ -1,12 +1,3 @@
-log = require('debug')('log')
-_ = require "lodash"
-
-Rest = require "./rest"
-
-Auth = require './auth'
-Utils = require './utils'
-config = require './config'
-
 Item = {}
 
 ### @get_item - ###
@@ -55,5 +46,3 @@ Item.update = (item_id, callback) ->
 
 Item.get_item_own = (item_id, callback) ->
   Rest._get "/items/#{item_id}", null, callback
-
-module.exports = Item

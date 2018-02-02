@@ -1,7 +1,8 @@
 log = require('debug')('log')
+_ = require "lodash"
+querystring = require('querystring')
 
-Rest = require "./rest"
-config = require "./config"
+https = require('https')
 
 Auth = {}
 
@@ -38,5 +39,3 @@ Auth._refresh_token = (callback) ->
     client_secret: config.client_secret
     refresh_token: config.session.refresh_token
   Rest._post "/oauth/token", data, callback
-
-module.exports = Auth
