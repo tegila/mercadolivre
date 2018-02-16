@@ -1,2 +1,2 @@
-# exports empty array
+# exports empty object
 config = {}
