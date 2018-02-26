@@ -5,8 +5,8 @@ Orders = {}
 # order_id: order id
 Orders.get_order = (order_id, callback) ->
   Auth.get_token ->
-    Rest._get "/orders/#{order_id}", config.session, callback
-
+    Rest._get "/orders/#{order_id}", _.pick(config.session, ['access_token', 'seller_id']), callback 
+    
 ### @ready_to_ship - ###
 Orders.ready_to_ship = (seller_id, callback) ->
   Auth.get_token ->

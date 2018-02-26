@@ -9,14 +9,10 @@ Mercadolivre =
   Search: Search
   Orders: Orders
   Questions: Questions
+  Messages: Messages
   Feedback: {}
   Metrics: {}
   Shipping: Shipping
-
-Mercadolivre.server_side = (client_id, client_secret, session) ->
-  config.client_id = client_id
-  config.client_secret = client_secret
-  config.session = session || {}
-  return Mercadolivre
+  Payments: Payments
 
 module.exports = Mercadolivre

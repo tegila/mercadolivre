@@ -1,9 +1,9 @@
 Item = {}
 
 ### @get_item - ###
-Item.get = (item_id, callback) ->
+Item.get_item = (item_id, callback) ->
   Auth.get_token ->
-    Rest._get "/items/#{item_id}", config.session, callback
+    Rest._get "/items/#{item_id}", _.pick(config.session, ['access_token', 'seller_id']), callback 
 
 ### @from_authenticated_seller - Fetch one order API Call ###
 Item.from_authenticated_seller = (seller, filter, callback) ->
