@@ -38,13 +38,13 @@ Auth.from_client_credentials = (callback) ->
     callback err, config.session  
 
 # Get a brand new token from OAUTH2 #
-Auth.from_authorization_code = (code, callback) ->
+Auth.from_authorization_code = (code, redirect_uri, callback) ->
   data =
     grant_type: "authorization_code"
     client_id: config.client_id
     client_secret: config.client_secret
     code: code
-    redirect_uri: "https://meli.uproc.com.br:8080/#/oauth_callback"
+    redirect_uri: redirect_uri
   Rest._post "/oauth/token", data, null, (err, data) ->
     console.log "response:", data
     config.session = {}

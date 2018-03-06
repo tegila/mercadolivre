@@ -1,7 +1,7 @@
 {
   "name": "mercadolivre",
-  "version": "1.0.0",
-  "description": "mercadolivre api to js interface",
+  "version": "2.0.1",
+  "description": "mercadolivre api interface",
   "main": "lib/index.js",
   "scripts": {
     "build": "coffee --output lib/ --compile src/*.coffee",
