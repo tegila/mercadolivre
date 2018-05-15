@@ -27,9 +27,9 @@ Item.status = (seller, callback) ->
 
 ### @get_item_and_description - ###
 Item.with_description = (item_id, callback) ->  
-  Rest._get "/items/#{item_id}", config.session, (product) ->
-    Rest._get "/items/#{item_id}/description", config.session, (description) ->
-      callback _.extend {}, product, description
+  Rest._get "/items/#{item_id}", {}, (err, product) ->
+    Rest._get "/items/#{item_id}/description", {}, (err, description) ->
+      callback err, _.extend({}, product, description)
 
 Item.description = (item_id, callback) ->
   Rest._get "/items/#{item_id}/description", config.session, callback
