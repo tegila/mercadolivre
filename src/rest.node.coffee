@@ -8,6 +8,9 @@ Rest_node = ->
   @_post = (endpoint, query, data, success) ->
     _request(endpoint, "POST", query, data, success)
 
+  @_put = (endpoint, query, data, success) ->
+    _request(endpoint, "PUT", query, data, success)
+
   _request = (endpoint, method, query, data, callback) ->
 
     dataString = JSON.stringify(data)
@@ -29,9 +32,7 @@ Rest_node = ->
 
     console.log "#{method} => #{endpoint}"
     req = https.request options, (res) ->
-      if res.statusCode is 401
-        callback true, res.headers
-        return;
+      
       res.setEncoding 'utf-8'
       responseString = ''
       res.on 'data', (data) ->
@@ -39,6 +40,11 @@ Rest_node = ->
       res.on 'end', ->
         try _response = JSON.parse(responseString)
         catch err then callback true, err
+        
+        if res.statusCode is 401
+          return callback true, _response
+        else if res.statusCode is 403
+          return callback true, _response
         callback false, _response
 
     req.write dataString

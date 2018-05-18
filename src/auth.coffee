@@ -58,8 +58,8 @@ Auth.from_authorization_code = (code, redirect_uri, callback) ->
 Auth.from_refresh_token = (callback) ->
   data =
     grant_type: "refresh_token"
-    client_id: config.client_id
-    client_secret: config.client_secret
+    client_id: config.session.client_id
+    client_secret: config.session.client_secret
     refresh_token: config.session.refresh_token
   Rest._post "/oauth/token", data, null, (err, data) ->
     console.log "response:", data
