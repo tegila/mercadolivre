@@ -45,6 +45,8 @@ Rest_node = ->
           return callback true, _response
         else if res.statusCode is 403
           return callback true, _response
+        else if res.statusCode is 404
+          return callback true, _response
         callback false, _response
 
     req.write dataString

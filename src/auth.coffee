@@ -19,9 +19,9 @@ Auth.get_token = (callback) =>
 Auth.set_token = (new_token) ->
   config.session = new_token
 
-Auth.set_apikey = (client_id, client_secret) ->
-  config.client_id = client_id
-  config.client_secret = client_secret
+Auth.set_apikey = (keychain) ->
+  config.client_id = keychain.client_id
+  config.client_secret = keychain.client_secret
 
 # Get a brand new token from OAUTH2 #
 Auth.from_client_credentials = (callback) ->
@@ -58,8 +58,8 @@ Auth.from_authorization_code = (code, redirect_uri, callback) ->
 Auth.from_refresh_token = (callback) ->
   data =
     grant_type: "refresh_token"
-    client_id: config.session.client_id
-    client_secret: config.session.client_secret
+    client_id: config.client_id
+    client_secret: config.client_secret
     refresh_token: config.session.refresh_token
   Rest._post "/oauth/token", data, null, (err, data) ->
     console.log "response:", data

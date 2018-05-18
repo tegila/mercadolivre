@@ -2,8 +2,7 @@ Item = {}
 
 ### @get_item - ###
 Item.get_item = (item_id, callback) ->
-  Auth.get_token ->
-    Rest._get "/items/#{item_id}", _.pick(config.session, ['access_token', 'seller_id']), callback 
+  Rest._get "/items/#{item_id}", null, callback 
 
 ### @from_authenticated_seller - Fetch one order API Call ###
 Item.from_authenticated_seller = (seller, filter, callback) ->
@@ -28,12 +27,13 @@ Item.status = (seller, callback) ->
 ### @get_item_and_description - ###
 Item.with_description = (item_id, callback) ->  
   Rest._get "/items/#{item_id}", {}, (err_1, product) ->
+    return callback(true, null) if err_1
     Rest._get "/items/#{item_id}/description", {}, (err_2, description) ->
-      return callback(err, product) if (err_2)
-      callback err, _.extend({}, product, description)
+      return callback(false, product) if err_2
+      callback false, _.extend({}, product, description)
 
 Item.description = (item_id, callback) ->
-  Rest._get "/items/#{item_id}/description", config.session, callback
+  Rest._get "/items/#{item_id}/description", null, callback
 
 ### @save_item - ###
 Item.save = (item, callback) ->
@@ -44,8 +44,13 @@ Item.save = (item, callback) ->
 ### @update_item - ###
 Item.update = (item_id, payload, callback) ->
   Auth.get_token ->
-    { seller_id, access_token } = config.session
-    Rest._put "/items/#{item_id}", { seller_id, access_token }, payload, callback
+    { access_token } = config.session
+    Rest._put "/items/#{item_id}", { access_token }, payload, callback
+
+Item.update_description = (item_id, payload, callback) ->
+  Auth.get_token ->
+    { access_token } = config.session
+    Rest._put "/items/#{item_id}/description", { access_token }, payload, callback
 
 Item.get_item_own = (item_id, callback) ->
   Rest._get "/items/#{item_id}", null, callback
