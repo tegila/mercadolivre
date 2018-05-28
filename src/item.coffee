@@ -52,5 +52,8 @@ Item.update_description = (item_id, payload, callback) ->
     { access_token } = config.session
     Rest._put "/items/#{item_id}/description", { access_token }, payload, callback
 
+Item.get_variations = (item_id, callback) ->
+  Rest._get "/items/#{item_id}/variations", null, callback 
+
 Item.get_item_own = (item_id, callback) ->
   Rest._get "/items/#{item_id}", null, callback
